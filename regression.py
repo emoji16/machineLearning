@@ -69,7 +69,7 @@ def ridgeRegression(X,y,theta,iterations,alpha,lamda):
     for iter in range(iterations):
         # python中矩阵加法: np.add
         theta = np.add(theta, alpha/m *np.dot(X.transpose(),y-np.dot(X,theta)) - 2*alpha*lamda*theta) 
-        losses.append(np.sum(np.power(np.dot(X,theta) - y,2))/(2*X.shape[0]))
+        losses.append(np.sum(np.power(np.dot(X,theta) - y,2))/(2*X.shape[0])) + np.sum(np.power(theta,2))
     return theta, losses
 
 def lassoRegression(X,y,theta,iterations,alpha,lamda):
@@ -83,7 +83,7 @@ def lassoRegression(X,y,theta,iterations,alpha,lamda):
         tmp = [1 if theta_x >= 0 else -1 for theta_x in theta]
         tmp = np.asarray(tmp).reshape(-1,1)
         theta = np.add(theta, alpha/m *np.dot(X.transpose(),y-np.dot(X,theta)) - 2*alpha*lamda*tmp) 
-        losses.append(np.sum(np.power(np.dot(X,theta) - y,2))/(2*X.shape[0]))
+        losses.append(np.sum(np.power(np.dot(X,theta) - y,2))/(2*X.shape[0])+ np.sum(np.abs(theta)))
     return theta, losses
 
 def leastSquaredRegression(X,y):
