@@ -1,18 +1,45 @@
 # -*- coding: utf-8 -*-
 '''
 决策树
+
+Part1—— 衡量随机变量不确定性的指标
 * 熵H(Y)：表示随机变量的不确定性= -sum(pi * logpi)
+
   条件熵H(Y|X)：sum(pi * H(Y|X == xi))
 
-* 信息增益/互信息 g(D,A) = H(Y) - H(Y|X)
+  信息增益/互信息 g(D,A) = H(Y) - H(Y|X)
   用法：特征选择
 
-* ID3算法构建决策树：每一步根据当前决策树的信息增益进行划分
+* 基尼指数：也是表示随机变量的不确定性= sum(pi * (1-pi)) = 1 - sum(pi^2)
+  特征A条件下的基尼指数Gini(D,A)，同上
+
+Part2—— 决策树构建算法
+* ID3算法构建决策树：根据当前信息增益，可以生成多叉树
     - 手写决策树实现过程
 
-* C4.5算法构建决策树：
-'''
+* C4.5算法构建决策树：根据当前信息增益比
+    - 防止id这种信息增益高但本身没有作用的特征占据过多作用
 
+* CART决策树/Gini基尼指数构建决策树：二叉树(多个类别则要进行类别划分，直到生成2叉树)
+
+Part3—— 决策树剪枝，防止过拟合
+* 预剪枝：生成过程中自顶而下剪枝，每一次划分之前在预留的测试集上看是否有效果提升，没有则不用
+* 后剪枝：生成完成后自底而上剪枝，去掉划分在预留的测试集上看是否有效果提升，有则去掉
+
+Part4—— 决策树处理连续值, 缺失值
+* 连续值离散化-二分法/分桶
+* 缺失值-删除/以比例代替
+
+Part5—— 多变量决策树：如z字形决策边界需要属性线性组合
+
+Part6—— sklearn决策树实践：都是二叉树
+    * sklearn.tree.DecisionTreeClassifier
+    * export_graphviz的使用
+    * metrics.classification_report,accuracy_score,precision_score,recall_score,f1_score
+    * class_weights可设(dict)
+'''
+# 手动实现ID3决策树
+# 实现sklearn决策树
 import operator
 from math import log
 import numpy as np
@@ -116,12 +143,41 @@ def predict(dtree, feature_names, testVec):
     else:
         print(node)
 
+from sklearn import tree
+import numpy as np
+from sklearn.tree import export_graphviz
+import graphviz
+
+def dtree_sklearn(dataSet, feature_names):
+    X = np.array(dataSet)[:,0:4]
+    y = np.array(dataSet)[:,-1]
+    model = tree.DecisionTreeClassifier()
+    model.fit(X,y)
+    print(model.predict([[1,1,0,1]]))
+    export_graph(model,feature_names)
+
+def export_graph(model,feature_names):
+    export_graphviz(
+        model,
+        out_file = 'tree.dot',
+        feature_names = feature_names,
+        class_names = ['yes','no'],
+        rounded = True,
+        filled = True
+    )
+    with open('tree.dot') as f:
+        dot_graph = f.read()
+    dot = graphviz.Source(dot_graph)
+    dot.view()
+    
+
 if __name__ == '__main__':
     dataSet, feature_names = load_data()
     H = entropy(dataSet)
     print(H)
     dtree = trainTree(dataSet, feature_names)
     predict(dtree, feature_names,[1,1,0,1])
+    dtree_sklearn(dataSet, feature_names)
 
 
    
