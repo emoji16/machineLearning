@@ -3,7 +3,7 @@
 贝叶斯分类：取后验概率最大的标签
 
 * 先验概率P(Y)，后验概率P(Y|X)
-P(Y|X) = P(X|Y)P(Y) / P(X) -- P(X)不考虑
+  P(Y|X) = P(X|Y)P(Y) / P(X) -- P(X)不考虑
 
 * 贝叶斯决策模型：假设数据X满足高斯分布
   朴素贝叶斯决策模型：假设数据各属性间相互独立，各分布函数相乘得到极大似然部分P(X|Y)
@@ -15,8 +15,6 @@ P(Y|X) = P(X|Y)P(Y) / P(X) -- P(X)不考虑
 * sklearn实现朴素贝叶斯
     * LabelEncoder().fit_transform
     * naive_bayes.MultinomialNB()
-* 
-
 '''
 
 import numpy as np

@@ -29,8 +29,10 @@
 * 分类：
 
   交叉熵loss，accuracy_score
-
-
+  
+  metrics：classification_report(y,pred),accuracy_score,precision_score,recall_score,f1_score，confusion_matrix(y,pred)
+  
+  
 
 ## sklearn
 
@@ -40,6 +42,8 @@
 
 ### (1) 回归
 
+线性回归
+
 ### (2) 分类
 
 #### 	逻辑回归
@@ -48,9 +52,11 @@
 
 ####     决策树
 
-* 	ID3：根据信息增益进行特征选择
+* 	ID3：根据熵-信息增益进行特征选择
+* 	C4.5：根据熵-信息增益比进行特征选择
+* 	CART决策树/Gini基尼指数决策树：二叉树，根据基尼指数进行特征选择
 
-
+#### 朴素贝叶斯
 
 ​	
 
@@ -63,3 +69,4 @@
 
 
 ## 3. 强化学习
+
