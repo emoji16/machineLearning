@@ -34,21 +34,21 @@
   
   
 
-## sklearn
-
-
-
 ## 1. 分类
 
 ### (1) 回归
 
-线性回归
+#### 线性回归
+
+from sklearn.linear_model import ElasticNet
 
 ### (2) 分类
 
 #### 	逻辑回归
 
-​    sigmoid函数
+sigmoid函数
+
+from sklearn.linear_model import LogisticRegression
 
 ####     决策树
 
@@ -56,17 +56,79 @@
 * 	C4.5：根据熵-信息增益比进行特征选择
 * 	CART决策树/Gini基尼指数决策树：二叉树，根据基尼指数进行特征选择
 
-#### 朴素贝叶斯
+from sklearn.tree import DecisionTreeClassifier
 
-​	
+#### 贝叶斯决策
+
+from sklearn.naive_bayes import MultinomialNB()
+
+#### 支持向量机
+
+* 线性可分支持向量机： 硬间隔最大化，线性二分类
+* 线性支持向量机：软间隔最大化，线性二分类
+* 非线性支持向量机：核技巧，非线性分类
+
+from sklearn.svm import LinearSVC
+
+from sklearn.svm import SVC
 
 ## 2. 无监督学习
 
 ### (1) 聚类
 
+#### Kmeans
+
+from sklearn.cluster import KMeans
+
+#### 层次聚类
+
+AGNES自下而上
+
+from sklearn.cluster import AgglomerativeClustering
+
+#### 密度聚类
+
+from sklearn.cluster import DBSCAN
+
+#### 高斯混合模型
+
+from sklearn.mixture import GaussianMixture
+
 ### (2) 降维
 
+#### PCA
 
+* 基于协方差矩阵的特征值分解：X (m*n) * 前k特征向量矩阵转置n*k -- > m*k
+
+* 基于数据矩阵的奇异值分解
+
+from sklearn.decomposition import PCA
 
 ## 3. 强化学习
 
+
+
+## 4.集成学习
+
+### (1) voting
+
+不同模型，相同数据集，并行结构，对结果投票
+
+* 硬投票分类器：结果取多
+
+* 软投票分类器：概率平均
+
+from sklearn.ensemble import VotingClassifier
+
+### (2) bagging
+
+相同模型，不同数据集，并行结构，对结果投票
+
+* bagging
+* pasting
+
+#### 随机森林
+
+### (3) boosting
+
+### stacking
