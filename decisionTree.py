@@ -20,7 +20,9 @@ Part2—— 决策树构建算法
 * C4.5算法构建决策树：根据当前信息增益比
     - 防止id这种信息增益高但本身没有作用的特征占据过多作用
 
-* CART决策树/Gini基尼指数构建决策树：二叉树(多个类别则要进行类别划分，直到生成2叉树)
+* CART决策回归树/Gini基尼指数构建决策树：二叉树(多个类别则要进行类别划分，直到生成2叉树)
+    可以解决回归和分类问题，处理连续变量的时候，根据最小剩余方差原则进行特征划分，每一个叶子节点对应一个回归方程--得到分段函数。
+    参考：https://blog.csdn.net/chocolate_chuqi/article/details/81698288
 
 Part3—— 决策树剪枝，防止过拟合
 * 预剪枝：生成过程中自顶而下剪枝，每一次划分之前在预留的测试集上看是否有效果提升，没有则不用
@@ -34,6 +36,7 @@ Part5—— 多变量决策树：如z字形决策边界需要属性线性组合
 
 Part6—— sklearn决策树实践：都是二叉树
     * sklearn.tree.DecisionTreeClassifier
+    * sklearn.tree.DecisionTreeRegressor
     * export_graphviz的使用
     * metrics.classification_report,accuracy_score,precision_score,recall_score,f1_score
     * class_weights可设(dict)
