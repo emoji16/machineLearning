@@ -42,6 +42,16 @@
 
 from sklearn.linear_model import ElasticNet
 
+#### 决策回归树：CART
+
+得到分段回归方程
+
+from sklearn.tree import DecisionTreeRegressor
+
+#### DBDT回归
+
+#### XGBoost回归
+
 ### (2) 分类
 
 #### 	逻辑回归
@@ -50,7 +60,7 @@ sigmoid函数
 
 from sklearn.linear_model import LogisticRegression
 
-####     决策树
+####     决策分类树: ID3, C4.5, CART
 
 * 	ID3：根据熵-信息增益进行特征选择
 * 	C4.5：根据熵-信息增益比进行特征选择
@@ -127,8 +137,38 @@ from sklearn.ensemble import VotingClassifier
 * bagging
 * pasting
 
+from sklearn.ensemble import BaggingClassifier
+
 #### 随机森林
+
+from sklearn.ensemble import RandomForestClassifier
 
 ### (3) boosting
 
-### stacking
+#### AdaBoost分类
+
+多个相同模型串行，加权加和 -- 迭代更新样本权值
+
+ from sklearn.ensemble import AdaBoostClassifier
+
+#### BDTvsGDBT分类回归
+
+BDT：多个树模型串行，加和 -- 每一个模型专注于拟合上一步的残差
+
+GBDT：多个树模型串行，加和 -- 每一个模型专注于拟合当前loss的负梯度
+
+from sklearn.ensemble import GradientBoostingRegressor
+
+from sklearn.ensemble import GradientBoostingClassifier
+
+#### XGBoost
+
+多个树模型串行，加和 -- 每一个模型取使当前loss最小的树结构和参数取值
+
+pip install xgboost, sklearn没有内置块
+
+### (4) stacking
+
+多个模型并行 + 一层串行
+
+pip install mlxtend, sklearn没有内置块
