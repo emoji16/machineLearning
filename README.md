@@ -172,3 +172,32 @@ pip install xgboost, sklearn没有内置块
 多个模型并行 + 一层串行
 
 pip install mlxtend, sklearn没有内置块
+
+## 5.两个实践
+### p1 - 数据pipeline处理 编码
+
+### p2 - 有偏样本训练数据集划分/上采样，下采样
+
+平衡比例：
+
+*  过采样/上采样: 随机过采样，SMOTE，borderline SMOTE算法
+
+  * 随机上采样:与旧数据重合 -- from imblearn.over_sampling import RandomOverSampler  
+  * SMOTE:在少数样本近邻中点生成新样本 -- from imblearn.over_sampling import SMOTE  
+  * Borderline SMOTE：将少数类样本按近邻类型分为noise,danger,safe;只从danger处生成新样本
+
+  ​            Borderline-1 SMOTE 在合成样本时所选近邻是少数类样本(即取少数类样本中点)
+
+  ​            Borderline-2 SMOTE 所有近邻都生成样本、
+
+  ​            在SMOTE参数中增加kind='borderline1'参数即可
+
+  * ADASYN:自适应合成抽样 最后各样本数不完全一样但是总数接近 -- from imblearn.over_sampling import ADASYN
+
+* 欠采样/下采样: 随机欠采样/原型选择，原型生成，数据清理 
+  * 原型选择：直接在原数据抽取至各类数据数目相同 -- from imblearn.under_sampling import RandomUnderSampler  
+  * 原型生成：先聚类，然后取各类中心 -- from imblearn.under_sampling import ClusterCentroids  
+  * NearMiss(可看做原型生成)：多个备选启发式规则，选取最有代表性的样本
+* 过采样+欠采样：SMOTE+ENN，SMOTE+Tomek 先过采样然后清洗至比例接近
+  * SMOTEENN：-- from imblearn.combine import SMOTEENN
+  * SMOTETomek：-- from imblearn.combine import SMOTETomek
