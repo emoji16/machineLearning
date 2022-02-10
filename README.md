@@ -1,6 +1,6 @@
 # 机器学习基础
 
-[TOC]
+
 
 ## 梯度下降
 
@@ -148,6 +148,8 @@ from sklearn.ensemble import RandomForestClassifier
 #### AdaBoost分类
 
 多个相同模型串行，加权加和 -- 迭代更新样本权值
+
+注意：使用指数函数作为loss function
 
  from sklearn.ensemble import AdaBoostClassifier
 
